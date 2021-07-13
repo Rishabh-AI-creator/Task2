@@ -1,12 +1,12 @@
 import java.util.Objects;
 
 public class Employee implements Comparable<Employee> {
-    public int empId;
+    public Integer empId;
     public String empName;
-    public int salary;
+    public Integer salary;
 
 
-    public Employee(int empId, String empName, int salary) {
+    public Employee(Integer empId, String empName, Integer salary) {
         this.empId = empId;
         this.empName = empName;
         this.salary = salary;
