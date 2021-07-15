@@ -1,35 +1,23 @@
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class EmployeeServiceImpl {
-    public void addEmployeeDetails() {
-        List<Employee> employees = new ArrayList<>();
-        employees.add(new Employee(1001, "Raman", 10000));
-        employees.add(new Employee(1002, "Rohit", 20000));
-        employees.add(new Employee(1003, "Manoj", 12000));
-        employees.add(new Employee(1004, "Amit", 12000));
-        employees.add(new Employee(1005, "Kabit", 11500));
-        employees.add(new Employee(1006, "Laxam", 11500));
-        employees.add(new Employee(1007, "Dipesh", 10000));
-        employees.add(new Employee(1008, "Amit", 10000));
-        employees.add(new Employee(1009, "Manoj", 17500));
-        employees.add(new Employee(1010, "Rohit", 21000));
-        employees.add(new Employee(1003, "Manoj", 15000));
-        employees.add(new Employee(1002, "Rohit", 20000));
-        for (Employee employee : employees) {
-            EmployeeRepository.employeesList.add(employee);
-        }
+    private EmployeeRepository employeeRepository;
+     public EmployeeServiceImpl(){
+         employeeRepository = new EmployeeRepository();
+     }
+    public void addEmployeeDetails(Employee employee) {
+        employeeRepository.insertEmployeeData(employee);
     }
 
-    public void getEmployeeDetail() {
-        List<Employee> employee = EmployeeRepository.employeesList;
-        for (Employee employee1 : employee) {
-            System.out.println(employee1);
-        }
+    public List<Employee> getEmployeeDetail() {
+        List<Employee> employee = employeeRepository.getEmployeeList();
+        return employee;
     }
 
     public void getSortedEmployeeDetail() {
-        List<Employee> employee = EmployeeRepository.employeesList;
+        List<Employee> employee = employeeRepository.getEmployeeList();
         Collections.sort(employee);
         for (Employee employee1 : employee) {
             System.out.println(employee1);
@@ -37,10 +25,10 @@ public class EmployeeServiceImpl {
     }
 
     public Map<Integer, Employee> getUniqueEmployeeDetail() {
-        List<Employee> employee = EmployeeRepository.employeesList;
+        List<Employee> employee = employeeRepository.getEmployeeList();
         Map<Integer, Employee> map = new HashMap<>();
         for (Employee employee1 : employee) {
-            map.put(employee1.empId, employee1);
+            map.put(employee1.getEmpId(), employee1);
         }
         return map;
     }
@@ -56,38 +44,41 @@ public class EmployeeServiceImpl {
     }
 
     public boolean printEmployeeDetailByID(Integer empId) {
-        List<Employee> employees = EmployeeRepository.employeesList;
+        List<Employee> employees = employeeRepository.getEmployeeList();
         Employee employee = new Employee();
         boolean check = false;
         for (Employee employee1 : employees) {
-            if (employee1.empId.equals(empId)) {
+            if (employee1.getEmpId().equals(empId)) {
                 check = true;
-                System.out.println(employee1.empId + " " + employee1.empName + " " + employee1.salary);
+                System.out.println(employee1.getEmpId() + " - " + employee1.getEmpName() + " - " + employee1.getSalary());
             }
         }
         return check;
     }
 
     public void printEmployeeDetailsBySalary() {
-        List<Employee> employeeList = EmployeeRepository.employeesList;
-
-          Map<Integer,String> map = new HashMap<>();
-          for(Employee employee: employeeList) {
-              map.put(employee.empId, employee.empName);
-
-          }
-          List list = new LinkedList(map.entrySet());
-          Collections.sort(list,new NameComparator());
+        List<Employee> employee = employeeRepository.getEmployeeList();
+        Collections.sort(employee,new NameComparator());
+        Map<Integer,String> map =new LinkedHashMap<>();
+        for(Employee employee1 : employee){
+            map.put(employee1.getEmpId(),employee1.getEmpName());
+        }
+        Set<Map.Entry<Integer, String>> list =  map.entrySet();
         System.out.println(list);
-
-//        Collections.sort(employeeList, new NameComparator());
-//        Map<Integer,List<Employee>> map= new HashMap<>();
-//        for(Employee employee: employeeList){
-//            map.put(employee.salary,employeeList);
-//        }
-//        System.out.println(map);
-
+        Map<Integer, List<Employee>> mapMap = employee.stream().collect(Collectors.groupingBy(Employee::getSalary));
+        System.out.println(mapMap);
     }
 
+    public boolean deleteEmployeeDetail(Integer empId) {
+       List<Employee> employeeList = employeeRepository.deleteEmployeeData();
+         boolean verify = false;
+        for (int i = 0 ; i < employeeList.size(); i++) {
+            if (employeeList.get(i).getEmpId().equals(empId)) {
+                verify = true;
+                employeeList.remove(i);
+            }
+        }
+         return verify;
+    }
 }
 

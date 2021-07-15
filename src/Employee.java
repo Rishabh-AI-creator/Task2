@@ -1,15 +1,27 @@
 import java.util.Objects;
 
 public class Employee implements Comparable<Employee> {
-    public Integer empId;
-    public String empName;
-    public Integer salary;
+    private Integer empId;
+    private String empName;
+    private Integer salary;
 
 
     public Employee(Integer empId, String empName, Integer salary) {
         this.empId = empId;
         this.empName = empName;
         this.salary = salary;
+    }
+
+    public Integer getEmpId() {
+        return empId;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public Integer getSalary() {
+        return salary;
     }
 
     public Employee() {
@@ -41,4 +53,5 @@ public class Employee implements Comparable<Employee> {
     public int compareTo(Employee employee) {
         return this.empId - employee.empId;
     }
+
 }
