@@ -1,13 +1,13 @@
 import java.util.List;
 
 public class EmployeeRepository {
-    private static EmployeeDataBase employeeDataBase;
+    private  EmployeeDataBase employeeDataBase;
 
     public EmployeeRepository(){
         employeeDataBase = new EmployeeDataBase();
     }
     public void insertEmployeeData(Employee employee){
-        employeeDataBase.addNewEmployeeDetails(employee);
+        employeeDataBase.getEmployeesList().add(employee);
     }
 
     public List<Employee> getEmployeeList(){

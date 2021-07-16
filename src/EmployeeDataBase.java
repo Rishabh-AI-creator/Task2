@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public  class EmployeeDataBase {
-   private List<Employee> employeesList;
+   private static List<Employee> employeesList;
 
    public EmployeeDataBase (){
       employeesList = new ArrayList<>();
@@ -19,11 +19,8 @@ public  class EmployeeDataBase {
       employeesList.add(new Employee(1003, "Manoj", 15000));
       employeesList.add(new Employee(1002, "Rohit", 20000));
    }
-   public  void addNewEmployeeDetails(Employee employee){
-      Employee employee1 =new Employee(employee.getEmpId(), employee.getEmpName(), employee.getSalary());
-      employeesList.add(employee1);
-   }
    public List<Employee> getEmployeesList(){
       return employeesList;
    }
+
 }
