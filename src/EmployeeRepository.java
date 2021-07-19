@@ -4,7 +4,7 @@ public class EmployeeRepository {
     private  EmployeeDataBase employeeDataBase;
 
     public EmployeeRepository(){
-        employeeDataBase = new EmployeeDataBase();
+        employeeDataBase = EmployeeDataBase.getInstance() ;
     }
     public void insertEmployeeData(Employee employee){
         employeeDataBase.getEmployeesList().add(employee);

@@ -50,7 +50,7 @@ public class EmployeeServiceImpl {
         for (Employee employee1 : employees) {
             if (employee1.getEmpId().equals(empId)) {
                 check = true;
-                System.out.println(employee1.getEmpId() + " - " + employee1.getEmpName() + " - " + employee1.getSalary());
+                System.out.println(employee1.getEmpId() + " - " + employee1.getEmpName() + " - " + employee1.getSalary() + " - " + employee1.getDept_Name());
             }
         }
         return check;
@@ -79,6 +79,63 @@ public class EmployeeServiceImpl {
             }
         }
          return verify;
+    }
+
+    public void printAllEmployeeNameUpperCase() {
+         List<Employee> employeeList = employeeRepository.getEmployeeList();
+         List<String> listName = employeeList.stream().map(employee1 -> employee1.getEmpName().toUpperCase()).collect(Collectors.toList());
+         System.out.println(listName);
+    }
+
+    public void printSalaryAboveInput(int salary) {
+         List<Employee> employees = employeeRepository.getEmployeeList();
+         List<Employee> employeesBySalary = employees.stream().filter(employee -> employee.getSalary()>salary).collect(Collectors.toList());
+        System.out.println(employeesBySalary);
+    }
+
+    public int totalSalaryOfEmployees() {
+        List<Employee> employees = employeeRepository.getEmployeeList();
+        int total_Salary = employees.stream().mapToInt(Employee::getSalary).sum();
+        return total_Salary;
+    }
+    public OptionalDouble averageSalaryOfEmployees() {
+        List<Employee> employees = employeeRepository.getEmployeeList();
+        OptionalDouble average_Salary = employees.stream().mapToInt(Employee::getSalary).average();
+        return average_Salary;
+    }
+    public OptionalInt maxSalaryOfEmployees() {
+        List<Employee> employees = employeeRepository.getEmployeeList();
+        OptionalInt max_Salary = employees.stream().mapToInt(Employee::getSalary).max();
+        return max_Salary;
+    }
+    public OptionalInt minSalaryOfEmployees() {
+        List<Employee> employees = employeeRepository.getEmployeeList();
+        OptionalInt min_Salary = employees.stream().mapToInt(Employee::getSalary).min();
+        return min_Salary;
+    }
+
+    public int totalSalaryOfEmployeesAccDepartment(String dept_name) {
+        List<Employee> employees = employeeRepository.getEmployeeList();
+        int total_DepartmentSalary = employees.stream().filter(employee -> employee.getDept_Name().equals(dept_name)).mapToInt(Employee::getSalary).sum();
+        return total_DepartmentSalary;
+    }
+
+    public OptionalDouble averageSalaryOfEmployeesAccDepartment(String dept_name) {
+        List<Employee> employees = employeeRepository.getEmployeeList();
+        OptionalDouble average_DepartmentSalary = employees.stream().filter(employee -> employee.getDept_Name().equals(dept_name)).mapToInt(Employee::getSalary).average();
+        return average_DepartmentSalary;
+    }
+
+    public OptionalInt maxSalaryOfEmployeesAccDepartment(String dept_name) {
+        List<Employee> employees = employeeRepository.getEmployeeList();
+        OptionalInt max_DepartmentSalary = employees.stream().filter(employee -> employee.getDept_Name().equals(dept_name)).mapToInt(Employee::getSalary).max();
+        return max_DepartmentSalary;
+    }
+
+    public OptionalInt minSalaryOfEmployeesAccDepartment(String dept_name) {
+        List<Employee> employees = employeeRepository.getEmployeeList();
+        OptionalInt min_DepartmentSalary = employees.stream().filter(employee -> employee.getDept_Name().equals(dept_name)).mapToInt(Employee::getSalary).min();
+        return min_DepartmentSalary;
     }
 }
 
