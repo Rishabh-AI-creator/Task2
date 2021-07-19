@@ -4,24 +4,25 @@ public class Main {
     public static void main(String[] args) {
        Scanner scanner = new Scanner(System.in);
         System.out.println("Employee Details Management");
-        System.out.println("Enter the option");
-        System.out.println("1. Add Employee details");
-        System.out.println("2. Print Employee List");
-        System.out.println("3. Print Employee List in Sorting Order");
-        System.out.println("4. Print all the unique Employee");
-        System.out.println("5. Print all the unique Employee By Sorting");
-        System.out.println("6. Print Employee details by EmpId ");
-        System.out.println("7. Print Employee List by Salary ");
-        System.out.println("8. Delete Employee Detail by EmpId ");
-        System.out.println("9. Print All Employee name in upper case");
-        System.out.println("10. Print All Employee List with salary greater than input by user");
-        System.out.println("11. Find Total,Average,Min,Max Salary in Employee List");
-        System.out.println("12. Print Total,Average,Min,Max Salary dept wise");
-        System.out.println("13. Exit");
 
         EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
 
         while(true){
+            System.out.println("\n");
+            System.out.println("1. Add Employee details");
+            System.out.println("2. Print Employee List");
+            System.out.println("3. Print Employee List in Sorting Order");
+            System.out.println("4. Print all the unique Employee");
+            System.out.println("5. Print all the unique Employee By Sorting");
+            System.out.println("6. Print Employee details by EmpId ");
+            System.out.println("7. Print Employee List by Salary ");
+            System.out.println("8. Delete Employee Detail by EmpId ");
+            System.out.println("9. Print All Employee name in upper case");
+            System.out.println("10. Print All Employee List with salary greater than input by user");
+            System.out.println("11. Find Total,Average,Min,Max Salary in Employee List");
+            System.out.println("12. Print Total,Average,Min,Max Salary dept wise");
+            System.out.println("13. Exit");
+            System.out.println("Enter option: ");
             int option = scanner.nextInt();
              if(option == 1){
                  System.out.println("Enter employee id:");
